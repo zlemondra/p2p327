@@ -14,6 +14,7 @@ public class PNode {
 		/*Hey Lauren, if you're wondering what this is, its the thread that starts he client server
 		 * I had to make it a run method in the new thread object so the thread wouldn't run in an endless
 		 * loop. try and catch was a n automated 	
+		 * hello
 		*/
 		new Thread(new Runnable() {
 			public void run() {
