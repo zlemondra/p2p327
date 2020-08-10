@@ -8,7 +8,9 @@ import java.util.HashMap;
 /*
  * Hello Professor Giacalone,
  * what this class is, is the part of the peer node that does all the server side of request like pushing and pulling the files like utlizing the DHT to
- * complete the client's request
+ * complete the client's request.
+ * 
+ * Lauren hates the way I comment my code :(
  */
 public class PNode_ServSide implements Runnable {// always gotta implement runnable if you're gonna use this class in a thread for JAVA
 	private Socket clientSocket;// this the socket that is going to represent the client's requests
