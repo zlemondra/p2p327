@@ -4,27 +4,31 @@ import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.HashMap;
-import java.util.concurrent.ConcurrentHashMap;
 
-public class PNode_ServSide {
-	private Socket clientSocket;
-	public static HashMap<String, String> DHT = new HashMap<String, String>();//distributed Hash Table in the form of a hashp
-	private boolean loop = true;
+/*
+ * Hello Professor Giacalone,
+ * what this class is, is the part of the peer node that does all the server side of request like pushing and pulling the files like utlizing the DHT to
+ * complete the client's request
+ */
+public class PNode_ServSide implements Runnable {// always gotta implement runnable if you're gonna use this class in a thread for JAVA
+	private Socket clientSocket;// this the socket that is going to represent the client's requests
+	public static HashMap<String, String> DHT = new HashMap<String, String>();//distributed Hash Table in the form of a hash map
+	private boolean loop = true; //bool for while loop in the run() method
 
 	public PNode_ServSide(Socket client) {
 		// takes in the client socket to do server tasks based on the client's request
 		clientSocket = client;
 	}
 
-	public void run(){
+	public void run(){ // this is what is going to be running in the serverNode class as the client threads
 		try{
 			//for communication over sockets between Client and server
 			DataInputStream in = new DataInputStream(clientSocket.getInputStream());//input
 			DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());//output
 
 			while(loop){
-				try{/*lauren if you're wondering why I have all theses try and catches, it's because of its auto-generated because I'm rerading data from 
-					the communication and you need a try-catch in case there's no data
+				try{/*lauren if you're wondering why I have all theses try and catches, it's because of its auto-generated because I'm rereading data from 
+					the communication node and you need a try-catch in case there's no data
 				*/
 					//read the choice according to client input
 					String answer = in.readUTF();
@@ -44,11 +48,8 @@ public class PNode_ServSide {
 						case "Pull":	
 
 							String key = in.readUTF();
-							String value = pull(key);
-							
-							/*Comment out below for Performance Evaluation*/
-							
-							/*Check if value is null return NULL to client, else return the actual VALUE for the KEY*/
+							String value = pull(key);							
+							//Check if value is null return NULL to client, else return the actual VALUE for the KEY
 							if(value == null)
 								out.writeUTF("null");
 							else

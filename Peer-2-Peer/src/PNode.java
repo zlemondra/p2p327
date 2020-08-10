@@ -1,9 +1,9 @@
 import java.util.*;
 import java.net.*;
 import java.io.*;
-import java.util.concurrent.ConcurrentHashMap;
+
 /*
- * Hello Professor Giaccolne,
+ * Hello Professor Giacalone,
  * what this class is, is the part of the peer node that does all the client side of request like pushing and pulling the files
  */
 public class PNode implements Runnable{
